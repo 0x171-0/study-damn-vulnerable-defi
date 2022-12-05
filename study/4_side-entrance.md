@@ -136,7 +136,7 @@ contract ReceiverAttackerSideEntrance is IFlashLoanEtherReceiver {
 
 ## 🔧 總結 & 修改方式
 
-[操弄依變因攻擊](https://www.notion.so/2a0407b1936b4540a1b45c930e346336)
+[操弄依變因攻擊](https://www.so/2a0407b1936b4540a1b45c930e346336)
 
 - **弱點：** 這題屬於 [[操弄依變因攻擊]]，
 - **攻擊：** 通過把 pool 在 [[FlashLoan]] 借給我們的錢在重新存回 pool 通過了 pool 本身的 `address(this).balance >= balanceBefore` 檢查

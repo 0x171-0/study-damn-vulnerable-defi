@@ -4,7 +4,7 @@
 
 # 🪙 Challenge #1 - Unstoppable 勢不可擋
 
-裡面有一個借貸池用有幾百萬顆 DVT tokens，而且免費提供閃電貸的服務。我們一開始有 **100 顆 DVT** 可以用，目標是要想辦法攻擊借貸池，讓這個池子**沒辦法再提供 [****Flash Loan**** 閃電貸](https://www.notion.so/Flash-Loan-aaf6168be4bc4eca84d805e99730223c) 的服務**。
+裡面有一個借貸池用有幾百萬顆 DVT tokens，而且免費提供閃電貸的服務。我們一開始有 **100 顆 DVT** 可以用，目標是要想辦法攻擊借貸池，讓這個池子**沒辦法再提供 [****Flash Loan**** 閃電貸](https://www.so/Flash-Loan-aaf6168be4bc4eca84d805e99730223c) 的服務**。
 
 - [See the contracts](https://github.com/tinchoabbate/damn-vulnerable-defi/tree/v2.2.0/contracts/unstoppable)
 - [Complete the challenge](https://github.com/tinchoabbate/damn-vulnerable-defi/blob/v2.2.0/test/unstoppable/unstoppable.challenge.js)
@@ -12,7 +12,7 @@
 ## 思考切入點
 
 - 有什麼資源可以用？ 100 顆 DVT
-- 什麼樣的狀況下 `UnstoppableLender` 會沒有辦法提供服務？flashLoan 有什麼條件？我們要可以改變他哪些條件可以讓 [flashLoan](https://www.notion.so/Flash-Loan-aaf6168be4bc4eca84d805e99730223c) revert？
+- 什麼樣的狀況下 `UnstoppableLender` 會沒有辦法提供服務？flashLoan 有什麼條件？我們要可以改變他哪些條件可以讓 [flashLoan](https://www.so/Flash-Loan-aaf6168be4bc4eca84d805e99730223c) revert？
 
 ## 合約研讀：尋找攻擊點
 
@@ -74,7 +74,7 @@ it('Exploit', async function () {
 
 ## 🔧 弱點總結 & 修改方式
 
-這題基本上是因為錯誤 [****Flash Loan**** 閃電貸](https://www.notion.so/Flash-Loan-aaf6168be4bc4eca84d805e99730223c)  依賴外部可控的條件判斷邏輯，導致無法提供服務，屬於邏輯錯誤的 [阻擋攻擊](https://www.notion.so/0e024713109c42bf899a9815511a0a7c) 、 [操弄依變因攻擊](https://www.notion.so/2a0407b1936b4540a1b45c930e346336)  類型，因為有一行 `assert(poolBalance == balanceBefore)`只要有人多轉了一筆錢造成`poolBalance != balanceBefore` flashloan 的服務就直接報廢掉，而且因為沒有地方可以取錢出來，所以此錯誤也不能被修正。
+這題基本上是因為錯誤 [****Flash Loan**** 閃電貸](https://www.so/Flash-Loan-aaf6168be4bc4eca84d805e99730223c)  依賴外部可控的條件判斷邏輯，導致無法提供服務，屬於邏輯錯誤的 [阻擋攻擊](https://www.so/0e024713109c42bf899a9815511a0a7c) 、 [操弄依變因攻擊](https://www.so/2a0407b1936b4540a1b45c930e346336)  類型，因為有一行 `assert(poolBalance == balanceBefore)`只要有人多轉了一筆錢造成`poolBalance != balanceBefore` flashloan 的服務就直接報廢掉，而且因為沒有地方可以取錢出來，所以此錯誤也不能被修正。
 
 弱點： 1. 可操弄邏輯判斷依變因 2. 未限制轉錢對象
 

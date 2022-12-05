@@ -20,7 +20,7 @@
 
 ### 觀察目標對象 FlashLoanReceiver
 
-我們可以先觀察一下 `FlashLoanReceiver.sol` 可以發現我們唯一可以抽乾使用者 ETH 的入口只有 `receiveEther` 這個可能，且因為有權限限制，所以請求一定要由 pool 發出，所以我們一定要呼叫 pool 的 function 發動攻擊。所以此題是屬於 [借刀殺人型攻擊](https://www.notion.so/7822e790bdfa4b05b9a4ce36987edabf) 。接下來要再來觀察一下我們要切的刀 - `NaiveReceiverLenderPool` 。
+我們可以先觀察一下 `FlashLoanReceiver.sol` 可以發現我們唯一可以抽乾使用者 ETH 的入口只有 `receiveEther` 這個可能，且因為有權限限制，所以請求一定要由 pool 發出，所以我們一定要呼叫 pool 的 function 發動攻擊。所以此題是屬於 [借刀殺人型攻擊](https://www.so/7822e790bdfa4b05b9a4ce36987edabf) 。接下來要再來觀察一下我們要切的刀 - `NaiveReceiverLenderPool` 。
 
 ```jsx
     // Function called by the pool during flash loan

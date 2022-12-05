@@ -2,11 +2,14 @@
 
 # ✏️ Study List
 
-1. [🪙 unstoppable](./study/1_unstoppable.md)
-2. [👶 naive-receiver](./study/2_naive-receiver.md)
-3. [🐑 truster](./study/3_truster.md)
-4. [🚪 side-entrance](./study/4_side-entrance.md)
-5. [💰 the-rewarder](./study/5_the-rewarder.md)
+| Game | theme |
+| -------- | -------- |
+| [🪙 unstoppable](./study/1_unstoppable.md)  | FlashLoan, 阻擋攻擊, 操縱變因攻擊|
+| [👶 naive-receiver](./study/2_naive-receiver.md)|FlashLoan, 借刀殺人型|
+| [🐑 truster](./study/3_truster.md)|FlashLoan, 外部合約呼叫攻擊|
+| [🚪 side-entrance](./study/4_side-entrance.md)|FlashLoan, 操縱變因攻擊|
+| [💰 the-rewarder](./study/5_the-rewarder.md)|FlashLoan, 套利攻擊, arbitrage|
+
 
 
 > [Original Repository](https://github.com/tinchoabbate/damn-vulnerable-defi/tree/v2.2.0)
